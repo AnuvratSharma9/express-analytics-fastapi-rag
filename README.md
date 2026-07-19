@@ -15,7 +15,6 @@ The system consists of two major phases:
 1. **Document Ingestion Pipeline**
 2. **Adaptive RAG Query Pipeline**
 
-![Architecture](images/architecture.png)
 
 ---
 
@@ -46,7 +45,7 @@ The workflow consists of:
 - Hallucination Detection
 - Web Search Fallback (if required)
 
-![LangGraph Workflow](images/langgraph-workflow.png)
+
 
 ---
 
@@ -61,7 +60,6 @@ Features include:
 - Response Generation
 - Chat History
 
-![Streamlit UI](images/streamlit-home.png)
 
 ---
 
@@ -76,7 +74,7 @@ Implemented endpoints:
 - GET /documents
 - POST /feedback
 
-![Swagger UI](images/swagger-ui.png)
+
 
 ---
 
@@ -94,7 +92,7 @@ Example request:
 
 Successful execution:
 
-![Ingestion API](images/ingest-api.png)
+
 
 ---
 
@@ -112,7 +110,7 @@ Example:
 
 Example response:
 
-![Query Response](images/query-response.png)
+
 
 ---
 
@@ -120,7 +118,7 @@ Example response:
 
 The documents endpoint returns all indexed documentation sources currently stored in the vector database.
 
-![Documents Endpoint](images/documents-endpoint.png)
+
 
 ---
 
@@ -129,8 +127,6 @@ The documents endpoint returns all indexed documentation sources currently store
 The feedback endpoint allows users to rate generated responses.
 
 The collected feedback is stored in a JSON file and can later be used for evaluation or model improvement.
-
-![Feedback Endpoint](images/feedback-endpoint.png)
 
 ---
 
