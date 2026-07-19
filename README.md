@@ -1,40 +1,31 @@
 # Express Analytics – Adaptive RAG Assistant
 
-An **Adaptive Retrieval-Augmented Generation (Adaptive RAG)** assistant developed as part of the **Express Analytics AI/ML Engineer Internship Assignment**.
+An **Adaptive Retrieval-Augmented Generation (Adaptive RAG)** system developed as part of the **Express Analytics AI/ML Engineer Internship Assignment**.
 
-The application combines **FastAPI**, **LangGraph**, **ChromaDB**, **Groq LLM**, and **Tavily Search** to answer user queries using retrieved documentation while minimizing hallucinations through document grading, query rewriting, and web-search fallback.
+The project combines **FastAPI**, **LangGraph**, **ChromaDB**, **Groq LLM**, and **Tavily Search** to build an intelligent documentation assistant capable of retrieving relevant information, rewriting ambiguous queries, detecting hallucinations, and performing web search fallback when required.
 
 ---
 
-## Features
+# 🚀 Features
 
 - Adaptive RAG workflow using LangGraph
 - Documentation ingestion from any website
 - Semantic search using ChromaDB
 - Query analysis and routing
 - Document relevance grading
-- Query rewriting for improved retrieval
+- Query rewriting
 - Hallucination detection
 - Web search fallback using Tavily
-- FastAPI REST APIs
-- Streamlit User Interface
+- REST APIs with FastAPI
+- Interactive Streamlit frontend
 - Source citation support
-- Feedback collection endpoint
+- User feedback collection
 
 ---
 
-# System Architecture
+# 🏗️ Document Ingestion Pipeline
 
-The application consists of two primary workflows:
-
-1. **Document Ingestion Pipeline**
-2. **Adaptive RAG Query Pipeline**
-
----
-
-# Document Ingestion Pipeline
-
-The ingestion pipeline converts raw documentation into a searchable vector database.
+The ingestion pipeline converts raw documentation into a searchable vector knowledge base.
 
 The pipeline performs the following operations:
 
@@ -45,132 +36,132 @@ The pipeline performs the following operations:
 - Store embeddings in ChromaDB
 
 <p align="center">
-    <img src="images/ingestion-pipeline.png" width="900">
+    <img src="images/ingestion-pipeline.png" alt="Document Ingestion Pipeline" width="900">
 </p>
 
 <p align="center">
-<i>Figure 1. End-to-end document ingestion pipeline.</i>
+    <em>Figure 1. End-to-end document ingestion pipeline.</em>
 </p>
 
 ---
 
-# Adaptive RAG Workflow
+# 🧠 Adaptive RAG Workflow
 
-After ingestion, every user query is processed through an adaptive workflow powered by **LangGraph**.
+After the documentation has been indexed, every incoming user query passes through an adaptive workflow powered by **LangGraph**.
 
-Instead of following a fixed pipeline, the system dynamically decides whether to:
+Unlike a traditional RAG pipeline, the workflow dynamically decides whether to:
 
 - Retrieve documents
-- Rewrite the query
+- Rewrite the user query
 - Generate an answer
-- Verify grounding
-- Perform web search if necessary
+- Verify answer grounding
+- Perform web search when necessary
 
 This adaptive routing significantly improves answer quality while reducing hallucinations.
 
 <p align="center">
-    <img src="images/langgraph-rag-workflow.png" width="950">
+    <img src="images/langgraph-rag-workflow.png" alt="Adaptive RAG Workflow" width="950">
 </p>
 
 <p align="center">
-<i>Figure 2. Adaptive RAG workflow implemented using LangGraph.</i>
+    <em>Figure 2. Adaptive RAG workflow implemented using LangGraph.</em>
 </p>
 
 ---
 
-# Streamlit User Interface
+# 💻 Streamlit User Interface
 
-The frontend is developed using **Streamlit**, providing a clean and interactive chat interface.
+The frontend is developed using **Streamlit**, providing a simple and interactive interface for communicating with the assistant.
 
 Users can:
 
-- Ask questions
-- Receive grounded responses
+- Ask documentation-related questions
+- Receive grounded answers
 - View retrieved sources
-- Interact with the RAG assistant in real time
+- Interact with the assistant in real time
 
 <p align="center">
-    <img src="images/ui.png" width="900">
+    <img src="images/ui.png" alt="Streamlit UI" width="900">
 </p>
 
 <p align="center">
-<i>Figure 3. Streamlit interface.</i>
+    <em>Figure 3. Streamlit User Interface.</em>
 </p>
 
 ---
 
-# REST API
+# ⚙️ REST API
 
-The backend exposes four REST endpoints.
+The backend exposes REST APIs for ingestion, querying, document inspection, and feedback collection.
 
 | Method | Endpoint | Description |
 |---------|----------|-------------|
 | POST | `/ingest` | Ingest documentation into ChromaDB |
 | POST | `/query` | Execute Adaptive RAG workflow |
-| GET | `/documents` | View indexed documentation |
+| GET | `/documents` | View indexed documents |
 | POST | `/feedback` | Store user feedback |
 
 ---
 
-## Documentation Ingestion Endpoint
+# 📥 Document Ingestion Endpoint
 
-The `/ingest` endpoint indexes documentation from a provided URL.
+The `/ingest` endpoint crawls documentation from the provided URL, creates embeddings, and stores them inside ChromaDB.
 
 <p align="center">
-    <img src="images/ingest-endpoint.png" width="900">
+    <img src="images/ingest-endpoint.png" alt="Ingest Endpoint" width="900">
 </p>
 
 <p align="center">
-<i>Figure 4. Successful document ingestion.</i>
-</p>
-
----
-
-## Query Endpoint
-
-The `/query` endpoint executes the Adaptive RAG workflow and returns grounded responses together with source references.
-
-<p align="center">
-    <img src="images/query-endpoint.png" width="900">
-</p>
-
-<p align="center">
-<i>Figure 5. Adaptive RAG query execution.</i>
+    <em>Figure 4. Successful document ingestion.</em>
 </p>
 
 ---
 
-## Documents Endpoint
+# 💬 Query Endpoint
 
-The `/documents` endpoint lists all indexed documentation sources stored inside ChromaDB.
+The `/query` endpoint executes the complete Adaptive RAG workflow and returns grounded responses along with supporting sources.
 
 <p align="center">
-    <img src="images/documents-endpoint.png" width="900">
+    <img src="images/query-endpoint.png" alt="Query Endpoint" width="900">
 </p>
 
 <p align="center">
-<i>Figure 6. Indexed documentation.</i>
-</p>
-
----
-
-## Feedback Endpoint
-
-Users can provide feedback on generated responses through the `/feedback` endpoint.
-
-The feedback is stored inside a JSON file and can later be used for evaluation or future improvements.
-
-<p align="center">
-    <img src="images/feedback-endpoint-jsonfile.png" width="850">
-</p>
-
-<p align="center">
-<i>Figure 7. Feedback storage endpoint.</i>
+    <em>Figure 5. Query execution using Adaptive RAG.</em>
 </p>
 
 ---
 
-# Project Structure
+# 📚 Documents Endpoint
+
+The `/documents` endpoint displays all indexed documentation sources currently stored inside ChromaDB.
+
+<p align="center">
+    <img src="images/documents-endpoint.png" alt="Documents Endpoint" width="900">
+</p>
+
+<p align="center">
+    <em>Figure 6. Indexed documentation sources.</em>
+</p>
+
+---
+
+# ⭐ Feedback Endpoint
+
+The `/feedback` endpoint allows users to rate generated responses.
+
+User feedback is stored inside a JSON file and can later be used for evaluation and future improvements.
+
+<p align="center">
+    <img src="images/feedback-endpoint-jsonfile.png" alt="Feedback Endpoint" width="850">
+</p>
+
+<p align="center">
+    <em>Figure 7. Feedback endpoint storing responses in JSON.</em>
+</p>
+
+---
+
+# 📂 Project Structure
 
 ```text
 express-analytics-fastapi-rag/
@@ -185,59 +176,77 @@ express-analytics-fastapi-rag/
 │   └── search/
 │
 ├── images/
+│   ├── ingestion-pipeline.png
+│   ├── langgraph-rag-workflow.png
+│   ├── ui.png
+│   ├── ingest-endpoint.png
+│   ├── query-endpoint.png
+│   ├── documents-endpoint.png
+│   └── feedback-endpoint-jsonfile.png
+│
 ├── test/
 ├── README.md
 ├── requirements.txt
-├── main.py
-└── .env.example
+├── .env.example
+├── .gitignore
+└── main.py
 ```
 
 ---
 
-# Tech Stack
+# 🛠️ Tech Stack
 
-| Category | Technologies |
-|-----------|--------------|
+| Category | Technology |
+|-----------|------------|
 | Backend | FastAPI |
 | Frontend | Streamlit |
-| Workflow | LangGraph |
+| Workflow Engine | LangGraph |
 | LLM | Groq |
 | Vector Database | ChromaDB |
-| Search | Tavily |
+| Web Search | Tavily Search |
 | Embeddings | HuggingFace Embeddings |
 | Parsing | BeautifulSoup |
 | Validation | Pydantic |
 
 ---
 
-# Installation
+# 📦 Installation
 
-Clone the repository
+## Clone the repository
 
 ```bash
 git clone https://github.com/AnuvratSharma9/express-analytics-fastapi-rag.git
+cd express-analytics-fastapi-rag
 ```
 
-Install dependencies
+## Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Create a `.env` file
+## Configure environment variables
+
+Create a `.env` file:
 
 ```env
-GROQ_API_KEY=your_key
-TAVILY_API_KEY=your_key
+GROQ_API_KEY=your_groq_api_key
+TAVILY_API_KEY=your_tavily_api_key
 ```
 
-Run the FastAPI backend
+## Run FastAPI
 
 ```bash
 uvicorn main:app --reload
 ```
 
-Run the Streamlit frontend
+FastAPI Documentation:
+
+```
+http://127.0.0.1:8000/docs
+```
+
+## Run Streamlit
 
 ```bash
 streamlit run app/frontend/app.py
@@ -245,20 +254,56 @@ streamlit run app/frontend/app.py
 
 ---
 
-# Future Improvements
+# 🔄 Adaptive RAG Workflow
 
-- Hybrid Retrieval (BM25 + Vector Search)
-- Multi-document ingestion
-- Persistent database for feedback
-- Conversation memory
-- Authentication
-- Incremental indexing
-- Docker deployment
+```text
+User Query
+     │
+     ▼
+Query Analysis
+     │
+     ▼
+Retrieve Documents
+     │
+     ▼
+Grade Documents
+     │
+ ┌───┴─────────────┐
+ │                 │
+ ▼                 ▼
+Generate      Rewrite Query
+ │                 │
+ ▼                 │
+Hallucination Check│
+ │                 │
+ ├────Grounded────►END
+ │
+ ▼
+Web Search
+ │
+ ▼
+Generate Final Answer
+ │
+ ▼
+END
+```
 
 ---
 
-# Author
+# 🔮 Future Improvements
+
+- Hybrid Retrieval (BM25 + Vector Search)
+- Incremental document indexing
+- Authentication and user management
+- Persistent feedback database
+- Conversation memory
+- Docker deployment
+- Kubernetes support
+
+---
+
+# 👨‍💻 Author
 
 **Anuvrat Sharma**
 
-AI/ML Engineer | Python | FastAPI | LangGraph | LLMs | RAG Systems
+AI/ML Engineer | Python | FastAPI | LangGraph | LLMs | Retrieval-Augmented Generation
